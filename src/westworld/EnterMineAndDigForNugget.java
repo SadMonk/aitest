@@ -8,7 +8,7 @@ package westworld;
  *
  * @author SadMonk
  */
-public class EnterMineAndDigForNugget implements State {
+public class EnterMineAndDigForNugget implements State<Miner> {
 
     private static EnterMineAndDigForNugget instance;
 
@@ -25,19 +25,32 @@ public class EnterMineAndDigForNugget implements State {
     @Override
     public void enter(Miner miner) {
         if(miner.getLocation() != "goldmine") {
-            System.out.println(miner.getId() + ": Going digging :)");
+            System.out.println(miner.getId() + ": Walkin' to the Gold Mine");
             miner.changeLocation("goldmine");
         }
     }
 
+    /**
+     * Dig until maxNuggets are carried or thirst overtakes,
+     * which leads the miner to the saloon
+     * @param miner The miner
+     */
     @Override
     public void execute(Miner miner) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        miner.increaseFatigue();
+        System.out.println(miner.getId() + ": Pickin' up a nugget.");
+        if(miner.pocketsFull()) {
+            miner.changeState(VisitBankAndDepositGold.instance());
+        }
+
+        if(miner.isThirsty()) {
+            miner.changeState(QuenchThirst.instance());
+        }
     }
 
     @Override
     public void exit(Miner miner) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(miner.getId() + ": Leavin' the mine");
     }
     
 }

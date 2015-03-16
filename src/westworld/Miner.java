@@ -10,8 +10,12 @@ package westworld;
  */
 public class Miner extends BasicGameEntity {
     
-    private State currentState;
-    
+    private State<Miner> currentState;
+
+    private State<Miner> previousState;
+
+    private State<Miner> globalState;
+
     private String location;
     
     private int goldCarried;
@@ -42,9 +46,9 @@ public class Miner extends BasicGameEntity {
     /**
      * Changes the state to a new state by executing the old state's
      * exit-method, switching states and executing the new state's enter-method.
-     * @param State newState The new State
+     * @param newState The new State
      */
-    public void changeState(State newState) {
+    public void changeState(State<Miner> newState) {
         //call exit method of existing state
         currentState.exit(this);
         
@@ -55,11 +59,33 @@ public class Miner extends BasicGameEntity {
         currentState.enter(this);
     }
 
+    public void RevertToPreviousState() {
+
+    }
+
     public String getLocation() {
         return location;
     }
 
     public void changeLocation(String location) {
         this.location = location;
+    }
+
+    public void increaseFatigue() {
+        this.fatigue++;
+    }
+
+    public boolean pocketsFull() {
+        if(this.goldCarried > 10) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isThirsty() {
+        if(this.thirst > 10) {
+            return true;
+        }
+        return false;
     }
 }

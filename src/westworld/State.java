@@ -8,12 +8,12 @@ package westworld;
  *
  * @author SadMonk
  */
-public interface State {
+public interface State<entityType> {
     
-    public void enter(Miner miner);
+    public void enter(entityType entity);
     
-    public void execute(Miner miner);
+    public void execute(entityType entity);
     
-    public void exit(Miner miner);
+    public void exit(entityType entity);
         
 }
