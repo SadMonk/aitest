@@ -6,21 +6,21 @@ package westworld;
 
 /**
  *
- * @author Chris
+ * @author SadMonk
  */
 public class Miner extends BasicGameEntity {
     
-    private State m_pCurrentState;
+    private State currentState;
     
-    private String m_Location;
+    private String location;
     
-    private int m_iGoldCarried;
+    private int goldCarried;
     
-    private int m_iMoneyInBank;
+    private int moneyInBank;
     
-    private int m_iThirst;
+    private int thirst;
     
-    private int m_iFatigue;
+    private int fatigue;
 
     /**
      * Constructor
@@ -31,28 +31,35 @@ public class Miner extends BasicGameEntity {
     }
     
     @Override
-    public void Update() {
-        m_iThirst++;
+    public void update() {
+        thirst++;
         
-        if (m_pCurrentState != null) {
-            m_pCurrentState.Execute(this);
+        if (currentState != null) {
+            currentState.execute(this);
         }
     }
     
     /**
      * Changes the state to a new state by executing the old state's
-     * Exit-method, switching states and executing the new state's Enter-method.
-     * @param State pNewState The new State
+     * exit-method, switching states and executing the new state's enter-method.
+     * @param State newState The new State
      */
-    public void ChangeState(State pNewState) {
+    public void changeState(State newState) {
         //call exit method of existing state
-        m_pCurrentState.Exit(this);
+        currentState.exit(this);
         
         //change state to new state
-        m_pCurrentState = pNewState;
+        currentState = newState;
         
         //call entry method of the new state
-        m_pCurrentState.Enter(this);
+        currentState.enter(this);
     }
-    
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void changeLocation(String location) {
+        this.location = location;
+    }
 }

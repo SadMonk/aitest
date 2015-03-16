@@ -6,27 +6,37 @@ package westworld;
 
 /**
  *
- * @author Chris
+ * @author SadMonk
  */
 public class EnterMineAndDigForNugget implements State {
 
-    public EnterMineAndDigForNugget() {
+    private static EnterMineAndDigForNugget instance;
+
+    private EnterMineAndDigForNugget() {
     }
 
-    
-    
+    public static EnterMineAndDigForNugget instance() {
+        if(EnterMineAndDigForNugget.instance == null) {
+            EnterMineAndDigForNugget.instance = new EnterMineAndDigForNugget();
+        }
+        return EnterMineAndDigForNugget.instance;
+    }
+
     @Override
-    public void Enter(Miner miner) {
+    public void enter(Miner miner) {
+        if(miner.getLocation() != "goldmine") {
+            System.out.println(miner.getId() + ": Going digging :)");
+            miner.changeLocation("goldmine");
+        }
+    }
+
+    @Override
+    public void execute(Miner miner) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Execute(Miner miner) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Exit(Miner miner) {
+    public void exit(Miner miner) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

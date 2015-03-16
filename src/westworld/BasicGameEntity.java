@@ -6,28 +6,28 @@ package westworld;
 
 /**
  * Basic game entity... tried to adapt this to java from a C++ tutorial.
- * @author Chris
+ * @author SadMonk
  */
 public class BasicGameEntity {
 
-    private int m_id;
-    private static int m_iNextValidId;
-    
-    private void SetId(int val) {
-        if(val >= m_iNextValidId) {
-            m_id = val;
-            m_iNextValidId = val + 1;
+    private int id;
+    private static int nextValidId;
+
+    public BasicGameEntity(int id) {
+        this.setId(id);
+    }
+
+    private void setId(int val) {
+        if(val >= nextValidId) {
+            id = val;
+            nextValidId = val + 1;
         }
     }
-    
-    public BasicGameEntity(int id) {
-        this.SetId(id);
-    } 
 
-    public void Update() {};
+    public void update() {}
     
-    public int ID() {
-        return this.m_id;
+    public int getId() {
+        return this.id;
     }
     
 }

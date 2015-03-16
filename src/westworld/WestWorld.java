@@ -6,7 +6,7 @@ package westworld;
 
 /**
  *
- * @author Chris
+ * @author SadMonk
  */
 public class WestWorld {
 

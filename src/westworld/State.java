@@ -6,14 +6,14 @@ package westworld;
 
 /**
  *
- * @author Chris
+ * @author SadMonk
  */
 public interface State {
     
-    public void Enter(Miner miner);
+    public void enter(Miner miner);
     
-    public void Execute(Miner miner);
+    public void execute(Miner miner);
     
-    public void Exit(Miner miner);
+    public void exit(Miner miner);
         
 }
